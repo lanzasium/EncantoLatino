@@ -1,11 +1,9 @@
-// Booking System Class
 window.BookingSystem = class BookingSystem {
     constructor() {
         this.currentStep = 1;
         this.selectedService = null;
         this.selectedDate = null;
         this.selectedTime = null;
-
         this.init();
     }
 
@@ -16,87 +14,73 @@ window.BookingSystem = class BookingSystem {
 
     populateServices() {
         const select = document.getElementById('bookingService');
-        if (!select || !window.EncantoData || !window.EncantoData.services) return;
+        if (!select || !window.EncantoData) return;
 
-        select.innerHTML = '<option value="">Seleziona...</option>';
-
-        // Group by type (simplified logic: all in one or strict mapping)
-        // Since our data structure is flat, we'll just add them.
-        // Ideally we add a 'category' field to data.js, but let's infer or just list them.
-
-        // Let's create two optgroups based on ID or title content
-        const liftingGroup = document.createElement('optgroup');
-        liftingGroup.label = "Lifting e Trattamenti";
-
-        const pmuGroup = document.createElement('optgroup');
-        pmuGroup.label = "Trucco Permanente";
+        select.innerHTML = '<option value="">Seleziona Esperienza...</option>';
 
         window.EncantoData.services.forEach(service => {
             const option = document.createElement('option');
             option.value = service.id;
-            // Parse price integer from string like "€60" -> "60"
-            const price = service.price.replace(/[^0-9]/g, '');
-            option.setAttribute('data-price', price);
-            option.textContent = `${service.title} - ${service.price}`;
-
-            if (service.title.includes('PMU') || service.title.includes('Eyeliner') || service.title.includes('Microblading') || service.title.includes('Labbra')) {
-                pmuGroup.appendChild(option);
-            } else {
-                liftingGroup.appendChild(option);
-            }
+            option.setAttribute('data-price', service.price.replace(/[^0-9]/g, ''));
+            option.textContent = `${service.title} — ${service.price}`;
+            select.appendChild(option);
         });
-
-        select.appendChild(liftingGroup);
-        select.appendChild(pmuGroup);
     }
 
     bindEvents() {
+        // Service Change
         const serviceSelect = document.getElementById('bookingService');
         if (serviceSelect) {
-            serviceSelect.addEventListener('change', (e) => this.handleServiceChange(e));
+            serviceSelect.addEventListener('change', (e) => {
+                this.selectedService = e.target.value;
+                this.updatePricePreview();
+                this.renderDates(); // Show dates only after service is picked
+            });
         }
 
-        const nextButtons = document.querySelectorAll('[data-action="next-step"]');
-        nextButtons.forEach(btn => {
+        // Navigation Buttons
+        document.querySelectorAll('[data-action="next-step"]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const step = parseInt(e.currentTarget.dataset.target);
+                if (this.validateStep(this.currentStep)) {
+                    this.goToStep(step);
+                }
+            });
+        });
+
+        document.querySelectorAll('[data-action="prev-step"]').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const step = parseInt(e.currentTarget.dataset.target);
                 this.goToStep(step);
             });
         });
 
-        // Input validation listeners for real-time button state
-        const inputs = document.querySelectorAll('#userName, #userPhone');
-        inputs.forEach(input => {
-            input.addEventListener('input', () => this.validateStep(this.currentStep));
-        });
-
-        const prevButtons = document.querySelectorAll('[data-action="prev-step"]');
-        prevButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                 const step = parseInt(e.currentTarget.dataset.target);
-                 this.goToStep(step);
-            });
-        });
-
+        // Form Submit
         const form = document.getElementById('bookingForm');
         if (form) {
-            form.addEventListener('submit', (e) => this.handleSubmit(e));
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.finishBooking();
+            });
         }
     }
 
-    handleServiceChange(e) {
-        this.updatePrice();
-        this.renderDates();
-        this.selectedService = e.target.value;
-    }
-
-    updatePrice() {
+    updatePricePreview() {
         const select = document.getElementById('bookingService');
         const priceDisplay = document.getElementById('bookingPrice');
         if (select && priceDisplay) {
+            if (select.value === "") {
+                priceDisplay.textContent = "€0";
+                return;
+            }
             const option = select.options[select.selectedIndex];
             const price = option.getAttribute('data-price');
-            if (price) priceDisplay.textContent = '€' + price;
+            // Animate price change
+            priceDisplay.style.opacity = 0;
+            setTimeout(() => {
+                priceDisplay.textContent = '€' + price;
+                priceDisplay.style.opacity = 1;
+            }, 200);
         }
     }
 
@@ -104,195 +88,151 @@ window.BookingSystem = class BookingSystem {
         const container = document.getElementById('availableDates');
         if (!container) return;
 
-        // Generate next 5 days
-        const dates = [];
+        container.innerHTML = '';
+
+        // Generate next 6 days excluding Sundays (example logic)
         const today = new Date();
-        for (let i = 1; i <= 5; i++) {
+        const daysMap = ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'];
+
+        for (let i = 1; i <= 6; i++) {
             const d = new Date(today);
             d.setDate(today.getDate() + i);
-            dates.push(d);
-        }
+            if (d.getDay() === 0) continue; // Skip Sunday
 
-        const daysMap = ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'];
-        const monthsMap = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
-
-        let html = '';
-        dates.forEach((date, index) => {
-            const dayName = daysMap[date.getDay()];
-            const dayNum = date.getDate();
-            const monthNum = monthsMap[date.getMonth()];
-
-            // Skip sundays
-            if (date.getDay() === 0) return;
-
-            html += `
-                <div class="booking-date-option" data-date="${date.toISOString()}" role="button" tabindex="0">
-                    <span class="date-day">${dayName}</span>
-                    <span class="date-num">${dayNum}/${monthNum}</span>
-                </div>
+            const div = document.createElement('div');
+            div.className = 'date-card';
+            div.innerHTML = `
+                <div style="font-size:0.7rem; text-transform:uppercase; color:var(--text-muted);">${daysMap[d.getDay()]}</div>
+                <div style="font-size:1.2rem; font-weight:600;">${d.getDate()}</div>
             `;
-        });
 
-        container.innerHTML = html;
-        this.bindDateSelection();
-    }
+            div.addEventListener('click', () => {
+                document.querySelectorAll('.date-card').forEach(c => c.classList.remove('selected'));
+                div.classList.add('selected');
+                this.selectedDate = d.toISOString();
 
-    bindDateSelection() {
-        const options = document.querySelectorAll('.booking-date-option');
-        options.forEach(opt => {
-            opt.addEventListener('click', () => {
-                // Remove active from all
-                options.forEach(o => o.classList.remove('active'));
-                // Add active to clicked
-                opt.classList.add('active');
-
-                this.selectedDate = opt.getAttribute('data-date');
-                this.selectedTime = null; // Reset time when date changes
-
-                // Show time slots
-                this.renderTimeSlots();
-                this.validateStep(1);
+                // Show Times
+                this.renderTimes();
             });
-        });
-    }
 
-    renderTimeSlots() {
-        // Find or create time slot container
-        let timeContainer = document.getElementById('availableTimes');
-        if (!timeContainer) {
-            const dateContainer = document.getElementById('availableDates');
-            timeContainer = document.createElement('div');
-            timeContainer.id = 'availableTimes';
-            timeContainer.className = 'time-slots-container';
-            dateContainer.parentNode.insertBefore(timeContainer, dateContainer.nextSibling);
+            container.appendChild(div);
         }
+    }
 
-        // Mock times
-        const times = ['09:30', '11:00', '14:30', '16:00', '18:00'];
+    renderTimes() {
+        const container = document.getElementById('timeSlotContainer');
+        const grid = document.getElementById('availableTimes');
+        container.classList.remove('hidden');
+        grid.innerHTML = '';
 
-        let html = '<label class="form-label" style="margin-top: 1rem;">Orario Disponibile</label><div class="time-options-grid">';
-        times.forEach(time => {
-            html += `<div class="booking-time-option" data-time="${time}">${time}</div>`;
-        });
-        html += '</div>';
+        const slots = ['09:00', '10:30', '12:00', '14:30', '16:00', '18:00'];
 
-        timeContainer.innerHTML = html;
+        slots.forEach(time => {
+            const div = document.createElement('div');
+            div.className = 'date-card'; // Reuse style
+            div.textContent = time;
 
-        // Bind time selection
-        const timeOptions = timeContainer.querySelectorAll('.booking-time-option');
-        timeOptions.forEach(opt => {
-            opt.addEventListener('click', () => {
-                timeOptions.forEach(o => o.classList.remove('active'));
-                opt.classList.add('active');
-                this.selectedTime = opt.getAttribute('data-time');
-                this.validateStep(1);
+            div.addEventListener('click', () => {
+                document.querySelectorAll('#availableTimes .date-card').forEach(c => c.classList.remove('selected'));
+                div.classList.add('selected');
+                this.selectedTime = time;
+                // Scroll to bottom to show Next button
+                div.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             });
+
+            grid.appendChild(div);
         });
     }
 
     validateStep(step) {
-        let isValid = false;
         if (step === 1) {
-            isValid = this.selectedService && this.selectedDate && this.selectedTime;
-        } else if (step === 2) {
-            const name = document.getElementById('userName').value;
-            const phone = document.getElementById('userPhone').value;
-            isValid = name.length > 2 && phone.length > 6;
-        }
-
-        const nextBtn = document.querySelector(`.booking-step[id="step-${step}"] [data-action="next-step"]`);
-        if (nextBtn) {
-            if (isValid) {
-                nextBtn.classList.remove('disabled');
-                nextBtn.style.opacity = '1';
-                nextBtn.style.pointerEvents = 'auto';
-            } else {
-                // Keep clickable for toast feedback
-                // nextBtn.style.opacity = '0.7';
+            if (!this.selectedService) {
+                this.showToast('Seleziona un trattamento per continuare.');
+                return false;
+            }
+            if (!this.selectedDate) {
+                this.showToast('Seleziona una data.');
+                return false;
+            }
+            if (!this.selectedTime) {
+                this.showToast('Seleziona un orario.');
+                return false;
             }
         }
-        return isValid;
+        if (step === 2) {
+            const name = document.getElementById('userName').value;
+            const phone = document.getElementById('userPhone').value;
+            if (name.length < 3 || phone.length < 5) {
+                this.showToast('Inserisci i tuoi dati correttamente.');
+                return false;
+            }
+        }
+        return true;
     }
 
     goToStep(step) {
-        // Validation
-        if (step === 2) {
-            const service = document.getElementById('bookingService').value;
-            if (!service) {
-                window.EncantoUtils.showToast({ type: 'warning', message: 'Seleziona un servizio per continuare.' });
-                return;
-            }
-            if (!this.selectedDate || !this.selectedTime) {
-                window.EncantoUtils.showToast({ type: 'warning', message: 'Seleziona una data e un orario.' });
-                return;
-            }
-        }
-
-        if (step === 3) {
-            const name = document.getElementById('userName').value;
-            const phone = document.getElementById('userPhone').value;
-            if (!name || !phone) {
-                window.EncantoUtils.showToast({ type: 'warning', message: 'Inserisci Nome e Telefono.' });
-                return;
-            }
-            this.updateSummary();
-        }
-
         // Hide all steps
-        document.querySelectorAll('.booking-step').forEach(el => el.classList.add('hidden'));
+        document.querySelectorAll('[id^="step-"]').forEach(el => {
+            el.classList.add('hidden');
+            el.classList.remove('fade-in'); // Reset animation
+        });
 
-        // Show target step
+        // Show target
         const target = document.getElementById(`step-${step}`);
-        if(target) target.classList.remove('hidden');
+        target.classList.remove('hidden');
+        target.classList.add('fade-in');
 
         // Update dots
-        document.querySelectorAll('.step-dot').forEach(el => {
-            const s = parseInt(el.getAttribute('data-step'));
-            if (s <= step) el.classList.add('active');
-            else el.classList.remove('active');
+        document.querySelectorAll('.step-indicator').forEach(dot => {
+            const s = parseInt(dot.dataset.step);
+            dot.classList.remove('active', 'completed');
+            if (s === step) dot.classList.add('active');
+            if (s < step) dot.classList.add('completed');
         });
 
         this.currentStep = step;
+
+        if (step === 3) this.updateSummary();
     }
 
     updateSummary() {
-        const serviceSelect = document.getElementById('bookingService');
-        const serviceName = serviceSelect.options[serviceSelect.selectedIndex].text;
+        const select = document.getElementById('bookingService');
         const price = document.getElementById('bookingPrice').textContent;
         const dateObj = new Date(this.selectedDate);
 
-        document.getElementById('summaryService').textContent = serviceName.split('-')[0];
-        document.getElementById('summaryDate').textContent = `${dateObj.toLocaleDateString()} alle ${this.selectedTime}`;
-        document.getElementById('summaryName').textContent = document.getElementById('userName').value;
+        document.getElementById('summaryService').textContent = select.options[select.selectedIndex].text.split('—')[0];
+        document.getElementById('summaryDate').textContent = `${dateObj.getDate()}/${dateObj.getMonth()+1} ore ${this.selectedTime}`;
         document.getElementById('summaryPrice').textContent = price;
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
-        window.EncantoUtils.showToast({
-            type: 'success',
-            title: 'Richiesta Inviata',
-            message: 'Ti confermerò l\'appuntamento su WhatsApp entro 24h.'
-        });
+    finishBooking() {
+        const name = document.getElementById('userName').value;
+        // Mock success
+        const btn = document.querySelector('#step-3 button[type="submit"]');
+        const originalText = btn.textContent;
+        btn.textContent = "Confermato!";
+        btn.classList.add('btn-primary');
 
-        // Simulate redirect or reset
-        setTimeout(() => window.location.reload(), 3000);
+        this.showToast(`Grazie ${name}, a breve riceverai la conferma.`);
+
+        setTimeout(() => {
+            window.location.reload();
+        }, 2000);
     }
 
-    // External API to select service from other sections
-    preselectService(serviceId) {
-        const select = document.getElementById('bookingService');
-        if (select) {
-            select.value = serviceId;
-            // Trigger change event manually
-            const event = new Event('change');
-            select.dispatchEvent(event);
-
-            this.updatePrice();
-            this.renderDates();
-
-            const bookingSection = document.querySelector('#booking');
-            if (bookingSection) bookingSection.scrollIntoView({ behavior: 'smooth' });
+    showToast(msg) {
+        // Simple alert replacement or stick to toast system from utils
+        if (window.EncantoUtils) {
+            window.EncantoUtils.showToast({ message: msg, type: 'warning' });
+        } else {
+            alert(msg);
         }
+    }
+
+    preselectService(id) {
+        const select = document.getElementById('bookingService');
+        select.value = id;
+        select.dispatchEvent(new Event('change'));
+        document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
     }
 };
