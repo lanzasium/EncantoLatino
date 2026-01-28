@@ -2362,98 +2362,17 @@
   <!-- Header -->
   <header class="header">
     <div class="header-top">
-      <div class="header-left">
-        <button class="lang-toggle" id="langToggle">IT</button>
-      </div>
-
+      <div class="header-left"><button class="lang-toggle" id="langToggle">IT</button></div>
       <div class="header-center">
         <div class="brand-stack">
-          <a href="#" class="logo-link" onclick="scrollToTop(event)">
-            <div class="logo-fire" aria-hidden="true">
-              <img src="images/logo.png" alt="Logo Encanto Latino" class="logo-img">
-              <svg class="flames" viewBox="0 0 200 120" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="flameGradient" x1="0" x2="0" y1="0" y2="1">
-                    <stop offset="0%" stop-color="#ffef6b"/>
-                    <stop offset="30%" stop-color="#d0a73f"/>
-                    <stop offset="70%" stop-color="#ff3b0f"/>
-                    <stop offset="100%" stop-color="#6e1925"/>
-                  </linearGradient>
-                  <filter id="blurSmall">
-                    <feGaussianBlur stdDeviation="1.5" />
-                  </filter>
-                  <filter id="glow">
-                    <feGaussianBlur stdDeviation="6" result="b" />
-                    <feMerge>
-                      <feMergeNode in="b"/>
-                      <feMergeNode in="SourceGraphic"/>
-                    </feMerge>
-                  </filter>
-                </defs>
-
-                <!-- Scintille sinistra -->
-                <g class="embers" opacity="0.9">
-                  <circle cx="45" cy="100" r="1.4" fill="#ffef6b">
-                    <animate attributeName="cy" values="100;80;60" dur="1.6s" repeatCount="indefinite" />
-                    <animate attributeName="opacity" values="0.9;0.5;0" dur="1.6s" repeatCount="indefinite" />
-                  </circle>
-                  <circle cx="75" cy="110" r="1.2" fill="#ff9f2a">
-                    <animate attributeName="cy" values="110;90;70" dur="1.9s" repeatCount="indefinite" begin="0.3s" />
-                    <animate attributeName="opacity" values="0.9;0.4;0" dur="1.9s" repeatCount="indefinite" begin="0.3s"/>
-                  </circle>
-                </g>
-
-                <!-- Scintille destra -->
-                <g class="embers" opacity="0.9">
-                  <circle cx="125" cy="100" r="1.4" fill="#ffef6b">
-                    <animate attributeName="cy" values="100;80;60" dur="1.7s" repeatCount="indefinite" begin="0.2s" />
-                    <animate attributeName="opacity" values="0.9;0.5;0" dur="1.7s" repeatCount="indefinite" begin="0.2s" />
-                  </circle>
-                  <circle cx="155" cy="110" r="1.2" fill="#ff9f2a">
-                    <animate attributeName="cy" values="110;90;70" dur="2s" repeatCount="indefinite" begin="0.5s" />
-                    <animate attributeName="opacity" values="0.9;0.4;0" dur="2s" repeatCount="indefinite" begin="0.5s"/>
-                  </circle>
-                </g>
-              </svg>
-            </div>
-          </a>
-          <span class="brand-name" data-it-text="Encanto Latino" data-en-text="Encanto Latino">Encanto Latino</span>
-          <span class="brand-subtitle" data-it-text="Beauty Studio · Milano" data-en-text="Beauty Studio · Milan">Beauty Studio · Milano</span>
+          <a href="#" class="logo-link" onclick="scrollToTop(event)"><div class="logo-fire" aria-hidden="true"><img src="images/logo.png" alt="Logo Encanto Latino" class="logo-img"><svg class="flames" viewBox="0 0 200 120" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="flameGradient" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#ffef6b"/><stop offset="30%" stop-color="#d0a73f"/><stop offset="70%" stop-color="#ff3b0f"/><stop offset="100%" stop-color="#6e1925"/></linearGradient><filter id="blurSmall"><feGaussianBlur stdDeviation="1.5" /></filter><filter id="glow"><feGaussianBlur stdDeviation="6" result="b" /><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g class="embers" opacity="0.9"><circle cx="45" cy="100" r="1.4" fill="#ffef6b"><animate attributeName="cy" values="100;80;60" dur="1.6s" repeatCount="indefinite" /><animate attributeName="opacity" values="0.9;0.5;0" dur="1.6s" repeatCount="indefinite" /></circle><circle cx="75" cy="110" r="1.2" fill="#ff9f2a"><animate attributeName="cy" values="110;90;70" dur="1.9s" repeatCount="indefinite" begin="0.3s" /><animate attributeName="opacity" values="0.9;0.4;0" dur="1.9s" repeatCount="indefinite" begin="0.3s"/></circle></g><g class="embers" opacity="0.9"><circle cx="125" cy="100" r="1.4" fill="#ffef6b"><animate attributeName="cy" values="100;80;60" dur="1.7s" repeatCount="indefinite" begin="0.2s" /><animate attributeName="opacity" values="0.9;0.5;0" dur="1.7s" repeatCount="indefinite" begin="0.2s" /></circle><circle cx="155" cy="110" r="1.2" fill="#ff9f2a"><animate attributeName="cy" values="110;90;70" dur="2s" repeatCount="indefinite" begin="0.5s" /><animate attributeName="opacity" values="0.9;0.4;0" dur="2s" repeatCount="indefinite" begin="0.5s"/></circle></g></svg></div></a>
+          <span class="brand-name" data-it-text="Encanto Latino" data-en-text="Encanto Latino">Encanto Latino</span><span class="brand-subtitle" data-it-text="Beauty Studio · Milano" data-en-text="Beauty Studio · Milan">Beauty Studio · Milano</span>
         </div>
       </div>
-
-      <div class="header-right">
-        <a href="#booking" class="btn btn-primary header-cta">
-          <span data-it-text="Prenota Ora" data-en-text="Book Now">Prenota Ora</span>
-          <i class="fa-solid fa-calendar-check"></i>
-        </a>
-      </div>
+      <div class="header-right"><a href="#booking" class="btn btn-primary header-cta"><span data-it-text="Prenota Ora" data-en-text="Book Now">Prenota Ora</span><i class="fa-solid fa-calendar-check"></i></a></div>
     </div>
-
-    <!-- Social Links -->
-    <div class="social-links-container" style="display: flex; justify-content: center; align-items: center; padding: 0.5rem 0; margin-top: 0;">
-      <div class="social-links" style="display: flex; gap: 1.5rem; align-items: center;">
-        <a href="https://www.instagram.com/encantolatinomilano?igsh=MTliN2cxd2d2eXQ0cA==" target="_blank" rel="noopener noreferrer" class="social-link instagram" aria-label="Instagram">
-          <i class="fa-brands fa-instagram"></i>
-        </a>
-        <a href="https://www.tiktok.com/@encanto..latino?_t=ZN-90x5lc4xqYY&_r=1" target="_blank" rel="noopener noreferrer" class="social-link tiktok" aria-label="TikTok">
-          <i class="fa-brands fa-tiktok"></i>
-        </a>
-        <a href="https://wa.me/393927234540?text=Ciao!%20Vorrei%20prenotare%20un%20appuntamento%20presso%20Encanto%20Latino." target="_blank" rel="noopener noreferrer" class="social-link whatsapp" aria-label="WhatsApp">
-          <i class="fa-brands fa-whatsapp"></i>
-        </a>
-      </div>
-    </div>
-
-    <!-- Navigation -->
-    <div class="nav-container">
-      <nav class="nav-links">
-        <a href="#about" class="nav-link" data-it-text="Chi Sono" data-en-text="About">Chi Sono</a>
-        <a href="#services" class="nav-link" data-it-text="Servizi" data-en-text="Services">Servizi</a>
-        <a href="#booking" class="nav-link" data-it-text="Prenotazioni" data-en-text="Booking">Prenotazioni</a>
-        <a href="#location" class="nav-link" data-it-text="Dove Sono" data-en-text="Location">Dove Sono</a>
-      </nav>
-    </div>
+    <div class="social-links-container" style="display: flex; justify-content: center; align-items: center; padding: 0.5rem 0; margin-top: 0;"><div class="social-links" style="display: flex; gap: 1.5rem; align-items: center;"><a href="https://www.instagram.com/encantolatinomilano?igsh=MTliN2cxd2d2eXQ0cA==" target="_blank" rel="noopener noreferrer" class="social-link instagram" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="https://www.tiktok.com/@encanto..latino?_t=ZN-90x5lc4xqYY&_r=1" target="_blank" rel="noopener noreferrer" class="social-link tiktok" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a><a href="https://wa.me/393927234540?text=Ciao!%20Vorrei%20prenotare%20un%20appuntamento%20presso%20Encanto%20Latino." target="_blank" rel="noopener noreferrer" class="social-link whatsapp" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a></div></div>
+    <div class="nav-container"><nav class="nav-links"><a href="#about" class="nav-link" data-it-text="Chi Sono" data-en-text="About">Chi Sono</a><a href="#services" class="nav-link" data-it-text="Servizi" data-en-text="Services">Servizi</a><a href="#booking" class="nav-link" data-it-text="Prenotazioni" data-en-text="Booking">Prenotazioni</a><a href="#location" class="nav-link" data-it-text="Dove Sono" data-en-text="Location">Dove Sono</a></nav></div>
   </header>
 
   <!-- Hero Section -->
