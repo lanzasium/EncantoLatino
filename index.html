@@ -196,6 +196,7 @@
       /* Header/Logo sizing */
       --logo-size: 90px;           /* desktop default */
       --header-padding-y: 0.6rem;     /* respiro verticale nel header */
+      --header-control-size: 38px;
       --header-height: calc(var(--logo-size) + (var(--header-padding-y) * 2));
       /* ========== Color Palette - Encanto Latino ========== */
       --gold: #d0a73f;
@@ -464,6 +465,12 @@
       justify-content: flex-end;
     }
 
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
     .header-social {
       display: flex;
       align-items: center;
@@ -471,8 +478,8 @@
     }
 
     .header-social .social-link {
-      width: 36px;
-      height: 36px;
+      width: var(--header-control-size);
+      height: var(--header-control-size);
       font-size: 0.9rem;
     }
 
@@ -648,7 +655,8 @@
     
 
     .header-cta {
-      padding: 0.65rem 1.4rem;
+      min-height: var(--header-control-size);
+      padding: 0 1.4rem;
       font-size: 0.75rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -701,8 +709,8 @@
     }
 
     .lang-toggle {
-      width: var(--icon-btn-size-md);
-      height: var(--icon-btn-size-md);
+      width: var(--header-control-size);
+      height: var(--header-control-size);
       background: 
         radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
       border: 2px solid var(--gold);
@@ -2035,6 +2043,7 @@
         --title-hero: 1.9rem;
         --title-section: 1.5rem;
         --logo-size: 78px;
+        --header-control-size: 34px;
       }
 
       .header-top {
@@ -2055,13 +2064,14 @@
       }
 
       .header-cta {
-        padding: 0.55rem 1.1rem;
+        min-height: var(--header-control-size);
+        padding: 0 1.1rem;
         font-size: 0.68rem;
       }
 
       .header-social .social-link {
-        width: 32px;
-        height: 32px;
+        width: var(--header-control-size);
+        height: var(--header-control-size);
         font-size: 0.8rem;
       }
       
@@ -2131,6 +2141,7 @@
         --title-hero: 1.6rem;
         --title-section: 1.4rem;
         --logo-size: 68px;
+        --header-control-size: 30px;
       }
 
       .header-top {
@@ -2394,13 +2405,15 @@
         </div>
       </div>
       <div class="header-right">
-        <div class="header-social">
-          <a href="https://www.instagram.com/encantolatinomilano?igsh=MTliN2cxd2d2eXQ0cA==" target="_blank" rel="noopener noreferrer" class="social-link instagram" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a href="https://www.tiktok.com/@encanto..latino?_t=ZN-90x5lc4xqYY&_r=1" target="_blank" rel="noopener noreferrer" class="social-link tiktok" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-          <a href="https://wa.me/393927234540?text=Ciao!%20Vorrei%20prenotare%20un%20appuntamento%20presso%20Encanto%20Latino." target="_blank" rel="noopener noreferrer" class="social-link whatsapp" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        <div class="header-actions">
+          <div class="header-social">
+            <a href="https://www.instagram.com/encantolatinomilano?igsh=MTliN2cxd2d2eXQ0cA==" target="_blank" rel="noopener noreferrer" class="social-link instagram" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@encanto..latino?_t=ZN-90x5lc4xqYY&_r=1" target="_blank" rel="noopener noreferrer" class="social-link tiktok" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/393927234540?text=Ciao!%20Vorrei%20prenotare%20un%20appuntamento%20presso%20Encanto%20Latino." target="_blank" rel="noopener noreferrer" class="social-link whatsapp" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+          <button class="lang-toggle" id="langToggle">IT</button>
+          <a href="#booking" class="btn btn-primary header-cta"><span data-it-text="Prenota Ora" data-en-text="Book Now">Prenota Ora</span><i class="fa-solid fa-calendar-check"></i></a>
         </div>
-        <button class="lang-toggle" id="langToggle">IT</button>
-        <a href="#booking" class="btn btn-primary header-cta"><span data-it-text="Prenota Ora" data-en-text="Book Now">Prenota Ora</span><i class="fa-solid fa-calendar-check"></i></a>
       </div>
     </div>
     <div class="nav-container"><nav class="nav-links"><a href="#about" class="nav-link" data-it-text="Chi Sono" data-en-text="About">Chi Sono</a><a href="#services" class="nav-link" data-it-text="Servizi" data-en-text="Services">Servizi</a><a href="#booking" class="nav-link" data-it-text="Prenotazioni" data-en-text="Booking">Prenotazioni</a><a href="#location" class="nav-link" data-it-text="Dove Sono" data-en-text="Location">Dove Sono</a></nav></div>
