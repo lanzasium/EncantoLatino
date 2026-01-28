@@ -195,8 +195,9 @@
     :root {
       /* Header/Logo sizing */
       --logo-size: 120px;           /* desktop default */
-      --header-padding-y: 0rem;     /* nessun padding verticale nel header */
-      --header-height: calc(var(--logo-size) + (var(--header-padding-y) * 2));
+      --header-padding-y: 0.35rem;     /* respiro verticale nel header */
+      --header-extra-height: 2.25rem;
+      --header-height: calc(var(--logo-size) + var(--header-extra-height) + (var(--header-padding-y) * 2));
       /* ========== Color Palette - Encanto Latino ========== */
       --gold: #d0a73f;
       --gold-light: #e4c068;
@@ -460,9 +461,34 @@
       top: 50%;
       transform: translate(-50%, -50%);
       display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
       align-items: center;
       justify-content: center;
-      height: var(--logo-size);
+      height: auto;
+    }
+
+    .brand-text {
+      text-align: center;
+      line-height: 1.1;
+    }
+
+    .brand-title {
+      display: block;
+      font-family: var(--font-title);
+      font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .brand-tagline {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
     }
 
     .logo-link {
@@ -611,8 +637,16 @@
     .header-right {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.8rem;
       z-index: 1;
+    }
+
+    .header-cta {
+      padding: 0.7rem 1.6rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      box-shadow: var(--shadow-elegant-md), var(--fire-glow-sm);
     }
 
     .icon-btn {
@@ -1995,6 +2029,7 @@
         --title-hero: 1.9rem;
         --title-section: 1.5rem;
         --logo-size: 110px;
+        --header-extra-height: 1.7rem;
       }
 
       .header-top {
@@ -2011,6 +2046,11 @@
       .lang-toggle {
         width: 34px;
         height: 34px;
+        font-size: 0.7rem;
+      }
+
+      .header-cta {
+        padding: 0.6rem 1.2rem;
         font-size: 0.7rem;
       }
       
@@ -2080,6 +2120,7 @@
         --title-hero: 1.6rem;
         --title-section: 1.4rem;
         --logo-size: 95px;
+        --header-extra-height: 1.4rem;
       }
 
       .header-top {
@@ -2099,6 +2140,18 @@
         height: 30px;
         font-size: 0.6rem;
         padding: 0;
+      }
+
+      .brand-title {
+        font-size: 0.85rem;
+      }
+
+      .brand-tagline {
+        font-size: 0.6rem;
+      }
+
+      .header-cta {
+        display: none;
       }
 
       .badge {
@@ -2379,8 +2432,17 @@
             </svg>
           </div>
         </a>
+        <div class="brand-text">
+          <span class="brand-title" data-it-text="Encanto Latino" data-en-text="Encanto Latino">Encanto Latino</span>
+          <span class="brand-tagline" data-it-text="Beauty Studio · Milano" data-en-text="Beauty Studio · Milan">Beauty Studio · Milano</span>
+        </div>
       </div>
-      
+
+      <div class="header-right">
+        <a href="#booking" class="btn btn-primary header-cta">
+          <span data-it-text="Prenota Ora" data-en-text="Book Now">Prenota Ora</span>
+          <i class="fa-solid fa-calendar-check"></i>
+        </a>
       </div>
     </div>
 
