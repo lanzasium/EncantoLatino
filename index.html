@@ -442,6 +442,7 @@
       position: relative;
       z-index: 1;
       min-height: var(--header-height);
+      flex-wrap: wrap;
     }
     
     @media (max-width: 768px) {
@@ -469,6 +470,15 @@
       display: flex;
       align-items: center;
       gap: 0.8rem;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      flex: 1;
+      min-width: 320px;
     }
 
     .header-social {
@@ -2028,6 +2038,10 @@
       .nav-links {
         gap: 1.35rem;
       }
+
+      .header-nav {
+        gap: 1.25rem;
+      }
       
       .filters-row {
         flex-direction: column;
@@ -2049,6 +2063,14 @@
       .header-top {
         padding: var(--header-padding-y) var(--space-4);
         min-height: var(--header-height);
+      }
+
+      .header-nav {
+        order: 3;
+        flex-basis: 100%;
+        justify-content: center;
+        padding-top: 0.35rem;
+        border-top: 1px solid rgba(208, 167, 63, 0.2);
       }
 
       .icon-btn {
@@ -2148,6 +2170,11 @@
         padding: var(--header-padding-y) var(--space-3);
         gap: 0.3rem;
         min-height: var(--header-height);
+      }
+
+      .header-nav {
+        gap: 0.6rem;
+        padding-top: 0.25rem;
       }
 
       .icon-btn {
@@ -2404,6 +2431,12 @@
           </div>
         </div>
       </div>
+      <nav class="header-nav nav-links">
+        <a href="#about" class="nav-link" data-it-text="Chi Sono" data-en-text="About">Chi Sono</a>
+        <a href="#services" class="nav-link" data-it-text="Servizi" data-en-text="Services">Servizi</a>
+        <a href="#booking" class="nav-link" data-it-text="Prenotazioni" data-en-text="Booking">Prenotazioni</a>
+        <a href="#location" class="nav-link" data-it-text="Dove Sono" data-en-text="Location">Dove Sono</a>
+      </nav>
       <div class="header-right">
         <div class="header-actions">
           <div class="header-social">
@@ -2416,7 +2449,6 @@
         </div>
       </div>
     </div>
-    <div class="nav-container"><nav class="nav-links"><a href="#about" class="nav-link" data-it-text="Chi Sono" data-en-text="About">Chi Sono</a><a href="#services" class="nav-link" data-it-text="Servizi" data-en-text="Services">Servizi</a><a href="#booking" class="nav-link" data-it-text="Prenotazioni" data-en-text="Booking">Prenotazioni</a><a href="#location" class="nav-link" data-it-text="Dove Sono" data-en-text="Location">Dove Sono</a></nav></div>
   </header>
 
   <!-- Hero Section -->
