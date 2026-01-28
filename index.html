@@ -194,10 +194,9 @@
     /* ==================== Design System Variables ==================== */
     :root {
       /* Header/Logo sizing */
-      --logo-size: 120px;           /* desktop default */
-      --header-padding-y: 0.35rem;     /* respiro verticale nel header */
-      --header-extra-height: 2.25rem;
-      --header-height: calc(var(--logo-size) + var(--header-extra-height) + (var(--header-padding-y) * 2));
+      --logo-size: 96px;           /* desktop default */
+      --header-padding-y: 0.75rem;     /* respiro verticale nel header */
+      --header-height: calc(var(--logo-size) + (var(--header-padding-y) * 2));
       /* ========== Color Palette - Encanto Latino ========== */
       --gold: #d0a73f;
       --gold-light: #e4c068;
@@ -435,48 +434,37 @@
       max-width: 100%;
       margin: 0;
       padding: var(--header-padding-y) var(--space-4);
-      display: flex;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
       align-items: center;
-      justify-content: space-between;
+      column-gap: var(--space-4);
       position: relative;
       z-index: 1;
       min-height: var(--header-height);
     }
     
     @media (max-width: 768px) {
-      :root { --logo-size: 110px; }
+      :root { --logo-size: 84px; }
       .header-top { min-height: var(--header-height); }
     }
 
     .header-left {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.9rem;
       z-index: 1;
     }
 
-    .brand-center {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
+    .brand-copy {
       display: flex;
       flex-direction: column;
-      gap: 0.35rem;
-      align-items: center;
-      justify-content: center;
-      height: auto;
-    }
-
-    .brand-text {
-      text-align: center;
       line-height: 1.1;
     }
 
     .brand-title {
       display: block;
       font-family: var(--font-title);
-      font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+      font-size: clamp(1rem, 1.1vw, 1.2rem);
       font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -485,8 +473,20 @@
 
     .brand-tagline {
       display: block;
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .header-center {
+      display: flex;
+      justify-content: center;
+    }
+
+    .header-kicker {
+      font-size: 0.75rem;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
       color: var(--text-secondary);
     }
@@ -2028,8 +2028,7 @@
       :root {
         --title-hero: 1.9rem;
         --title-section: 1.5rem;
-        --logo-size: 110px;
-        --header-extra-height: 1.7rem;
+        --logo-size: 82px;
       }
 
       .header-top {
@@ -2047,6 +2046,10 @@
         width: 34px;
         height: 34px;
         font-size: 0.7rem;
+      }
+
+      .header-center {
+        display: none;
       }
 
       .header-cta {
@@ -2119,8 +2122,7 @@
       :root {
         --title-hero: 1.6rem;
         --title-section: 1.4rem;
-        --logo-size: 95px;
-        --header-extra-height: 1.4rem;
+        --logo-size: 70px;
       }
 
       .header-top {
@@ -2143,11 +2145,11 @@
       }
 
       .brand-title {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
       }
 
       .brand-tagline {
-        font-size: 0.6rem;
+        font-size: 0.55rem;
       }
 
       .header-cta {
@@ -2379,10 +2381,6 @@
   <header class="header">
     <div class="header-top">
       <div class="header-left">
-        <button class="lang-toggle" id="langToggle">IT</button>
-      </div>
-      
-      <div class="brand-center">
         <a href="#" class="logo-link" onclick="scrollToTop(event)">
           <div class="logo-fire" aria-hidden="true">
             <img src="images/logo.png" alt="Logo Encanto Latino" class="logo-img">
@@ -2432,13 +2430,18 @@
             </svg>
           </div>
         </a>
-        <div class="brand-text">
+        <div class="brand-copy">
           <span class="brand-title" data-it-text="Encanto Latino" data-en-text="Encanto Latino">Encanto Latino</span>
           <span class="brand-tagline" data-it-text="Beauty Studio · Milano" data-en-text="Beauty Studio · Milan">Beauty Studio · Milano</span>
         </div>
       </div>
 
+      <div class="header-center">
+        <span class="header-kicker" data-it-text="Lash • Brows • PMU" data-en-text="Lash • Brows • PMU">Lash • Brows • PMU</span>
+      </div>
+
       <div class="header-right">
+        <button class="lang-toggle" id="langToggle">IT</button>
         <a href="#booking" class="btn btn-primary header-cta">
           <span data-it-text="Prenota Ora" data-en-text="Book Now">Prenota Ora</span>
           <i class="fa-solid fa-calendar-check"></i>
