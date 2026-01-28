@@ -184,6 +184,9 @@ body {
   overflow-x: hidden;
   font-size: 16px;
   letter-spacing: 0.01em;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
 }
 
 
@@ -578,12 +581,14 @@ a {
     0 0 20px rgba(208, 167, 63, 0.3),
     0 0 40px rgba(208, 167, 63, 0.2);
   position: relative;
+  display: inline-block;
+  max-width: 100%;
 }
 
 .elegant-title::before {
   content: '';
   position: absolute;
-  left: -10px;
+  left: -12px;
   top: 50%;
   transform: translateY(-50%);
   width: 4px;
@@ -989,6 +994,8 @@ a {
   transition: var(--transition-slow);
   overflow: hidden;
   height: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .card::before {
