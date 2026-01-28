@@ -1050,7 +1050,6 @@ a {
 }
 
 .card-meta {
-  margin-top: auto;
   margin-bottom: 1rem;
   padding-top: 1rem;
   border-top: 1px solid var(--border-light);
@@ -1066,6 +1065,7 @@ a {
 
 /* Card Footer */
 .card-footer {
+  margin-top: auto;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -1425,6 +1425,82 @@ a {
 .form-textarea {
   resize: vertical;
   min-height: 100px;
+}
+
+/* ==================== Location Section ==================== */
+.location-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.location-card {
+  background: linear-gradient(135deg, rgba(208, 167, 63, 0.05), var(--card));
+  padding: 3rem;
+  border-radius: 0;
+  border: 1px solid rgba(208, 167, 63, 0.3);
+  box-shadow: var(--shadow-elegant-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.location-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--gold), var(--red-dark));
+}
+
+.map-placeholder {
+  background: linear-gradient(135deg, rgba(10, 6, 6, 0.8), rgba(26, 19, 21, 0.9));
+  padding: 3rem;
+  border-radius: 0;
+  border: 1px solid rgba(208, 167, 63, 0.3);
+  box-shadow: var(--shadow-elegant-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  position: relative;
+  overflow: hidden;
+}
+
+.info-grid {
+  background: linear-gradient(135deg, rgba(110, 25, 37, 0.05), rgba(26, 19, 21, 0.9));
+  padding: 2.5rem;
+  border-radius: 0;
+  border: 1px solid rgba(110, 25, 37, 0.3);
+  box-shadow: var(--shadow-elegant-md);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.booking-wrapper {
+  width: 100%;
+  margin: 2rem auto;
+  background: linear-gradient(135deg, rgba(208, 167, 63, 0.03), var(--card));
+  padding: clamp(2rem, 5vw, 4rem);
+  border-radius: 0;
+  border: 1px solid rgba(208, 167, 63, 0.3);
+  box-shadow: var(--shadow-elegant-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.booking-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--gold), var(--red-dark));
+  opacity: 0.6;
 }
 
 /* ==================== Footer - Firma Scrollante ==================== */
@@ -1818,6 +1894,15 @@ a {
 }
 
 /* ==================== Utility ==================== */
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
 .hidden {
   display: none !important;
 }
@@ -1828,6 +1913,18 @@ a {
 
 .mt-2 { margin-top: 1.75rem; }
 .mb-2 { margin-bottom: 1.75rem; }
+
+.card-centered .card-header,
+.card-centered .card-title,
+.card-centered .card-desc,
+.card-centered .card-footer {
+  text-align: center;
+  justify-content: center;
+}
+
+.card-centered .card-icon {
+  margin: 0 auto;
+}
 
 /* ==================== Toast Notifications System ==================== */
 .toast-container {

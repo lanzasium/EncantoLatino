@@ -134,28 +134,23 @@ function renderProducts() {
 
     window.EncantoData.products.forEach(product => {
         const card = document.createElement('div');
-        card.className = 'card';
-        // Remove overrides, keep standard padding
+        card.className = 'card card-centered';
 
         const descText = currentLang === 'it' ? product.desc.it : product.desc.en;
         const buyText = currentLang === 'it' ? 'Acquista' : 'Buy';
 
         card.innerHTML = `
-         <div class="card-header" style="margin-bottom: 1rem; justify-content: center;">
-            <div class="card-icon" style="width: 80px; height: 80px; font-size: 2rem;">
-               <i class="fa-solid ${product.icon}"></i>
-            </div>
+         <div class="card-header">
+            <div class="card-icon"><i class="fa-solid ${product.icon}"></i></div>
          </div>
-         <h3 class="card-title" style="text-align: center; margin-bottom: 0.5rem;">${product.title}</h3>
+         <h3 class="card-title">${product.title}</h3>
 
-         <p class="card-desc" style="text-align: center; font-style: italic; margin-bottom: 1rem;">
+         <p class="card-desc" style="font-style: italic;">
             ${descText}
          </p>
 
-         <div class="card-footer" style="margin-top: auto;">
-            <div style="display: flex; justify-content: center; margin-bottom: 1rem;">
-                <span class="card-price" style="font-size: 1.5rem;">${product.price}</span>
-            </div>
+         <div class="card-footer">
+            <div class="card-price">${product.price}</div>
             <a href="#" class="btn btn-outline">
                 ${buyText} <i class="fa-solid fa-external-link-alt" style="margin-left: 8px;"></i>
             </a>
