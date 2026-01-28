@@ -84,27 +84,27 @@ function renderServices() {
 
     window.EncantoData.services.forEach(service => {
         const card = document.createElement('div');
-        card.className = 'service-card';
+        card.className = 'card';
 
         const detailText = currentLang === 'it' ? service.detail.it : service.detail.en;
         const descText = currentLang === 'it' ? service.desc.it : service.desc.en;
         const btnText = currentLang === 'it' ? 'Prenota' : 'Book';
 
         card.innerHTML = `
-          <div class="service-card-header">
-            <div class="service-card-icon"><i class="fa-solid ${service.icon}"></i></div>
-            <h3 class="service-card-title">${service.title}</h3>
+          <div class="card-header">
+            <div class="card-icon"><i class="fa-solid ${service.icon}"></i></div>
+            <h3 class="card-title">${service.title}</h3>
           </div>
-          <p class="service-card-desc">${descText}</p>
+          <p class="card-desc">${descText}</p>
 
-          <div style="margin-top: auto; margin-bottom: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-light);">
-             <small style="color: var(--gold); font-family: var(--font-body); font-weight: 600; letter-spacing: 0.03em;">
+          <div class="card-meta">
+             <small class="card-meta-text">
                <i class="fa-solid fa-check" style="margin-right: 4px;"></i> ${detailText}
              </small>
           </div>
 
-          <div class="service-footer" style="border-top: none; padding-top: 0;">
-            <div class="service-price">${service.price} <small>${service.duration}</small></div>
+          <div class="card-footer">
+            <div class="card-price">${service.price} <small>${service.duration}</small></div>
             <button class="btn btn-outline" data-service-id="${service.id}">
               ${btnText}
             </button>
@@ -127,34 +127,38 @@ function renderProducts() {
     const section = document.getElementById('products');
     if (!section) return;
 
-    const grid = section.querySelector('.services-grid');
+    const grid = section.querySelector('.cards-grid');
     if (!grid) return;
 
     grid.innerHTML = ''; // Clear hardcoded content
 
     window.EncantoData.products.forEach(product => {
         const card = document.createElement('div');
-        card.className = 'service-card';
-        card.style.cssText = 'padding: 0; background: var(--bg); border: none;';
+        card.className = 'card';
+        // Remove overrides, keep standard padding
 
         const descText = currentLang === 'it' ? product.desc.it : product.desc.en;
         const buyText = currentLang === 'it' ? 'Acquista' : 'Buy';
 
         card.innerHTML = `
-         <div style="position: relative; padding-top: 100%; overflow: hidden; background: #2a2a2a;">
-            <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 3rem;">
+         <div class="card-header" style="margin-bottom: 1rem; justify-content: center;">
+            <div class="card-icon" style="width: 80px; height: 80px; font-size: 2rem;">
                <i class="fa-solid ${product.icon}"></i>
             </div>
          </div>
-         <div style="padding: 1.5rem 1rem;">
-            <h3 class="service-card-title" style="font-size: 1.25rem; margin-bottom: 0.5rem;">${product.title}</h3>
-            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; font-style: italic;">
-               ${descText}
-            </p>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-               <span style="color: var(--gold); font-weight: 700;">${product.price}</span>
-               <a href="#" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.85rem;">${buyText} <i class="fa-solid fa-external-link-alt" style="margin-left: 5px;"></i></a>
+         <h3 class="card-title" style="text-align: center; margin-bottom: 0.5rem;">${product.title}</h3>
+
+         <p class="card-desc" style="text-align: center; font-style: italic; margin-bottom: 1rem;">
+            ${descText}
+         </p>
+
+         <div class="card-footer" style="margin-top: auto;">
+            <div style="display: flex; justify-content: center; margin-bottom: 1rem;">
+                <span class="card-price" style="font-size: 1.5rem;">${product.price}</span>
             </div>
+            <a href="#" class="btn btn-outline">
+                ${buyText} <i class="fa-solid fa-external-link-alt" style="margin-left: 8px;"></i>
+            </a>
          </div>
         `;
         grid.appendChild(card);
