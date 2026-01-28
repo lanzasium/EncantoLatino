@@ -35,7 +35,7 @@
   <!-- Google Fonts - Elegant Latin Theme -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
   
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -194,34 +194,28 @@
     /* ==================== Design System Variables ==================== */
     :root {
       /* Header/Logo sizing */
-      --logo-size: 100px;           /* Cleaner, smaller logo */
-      --header-padding-y: 0.5rem;
+      --logo-size: 120px;           /* desktop default */
+      --header-padding-y: 0rem;     /* nessun padding verticale nel header */
       --header-height: calc(var(--logo-size) + (var(--header-padding-y) * 2));
-
-      /* ========== Color Palette - Calda Elegante (Premium Dark) ========== */
-      --gold: #C6A87C;              /* Sand Gold - Softer */
-      --gold-light: #D8C09D;
-      --gold-dark: #A68A5C;
-
-      --red-dark: #8D2335;          /* Wine Red - Elegant */
-      --red-dark-light: #A33B4D;
-      --red-dark-dark: #5C121D;
-
-      --bg: #1C1B1B;                /* Warm Charcoal */
-      --card: #242323;              /* Slightly lighter surface */
-      --card-hover: #2A2929;
-
-      --border: rgba(198, 168, 124, 0.3);
-      --border-light: rgba(198, 168, 124, 0.5);
-      --border-red: rgba(141, 35, 53, 0.3);
-
-      --text: #E0E0E0;              /* Soft White */
-      --text-muted: rgba(224, 224, 224, 0.85);
-      --text-secondary: rgba(224, 224, 224, 0.65);
-
-      --success: #4CAF50;
-      --error: #E57373;
-      --warning: #FFB74D;
+      /* ========== Color Palette - Encanto Latino ========== */
+      --gold: #d0a73f;
+      --gold-light: #e4c068;
+      --gold-dark: #b8932a;
+      --red-dark: #6e1925;
+      --red-dark-light: #8d2335;
+      --red-dark-dark: #4d0f18;
+      --bg: #0a0606;
+      --card: #1a1315;
+      --card-hover: #2a1f22;
+      --border: #d0a73f;
+      --border-light: #e4c068;
+      --border-red: #6e1925;
+      --text: #ffffff;
+      --text-muted: rgba(255,255,255,0.90);
+      --text-secondary: rgba(255,255,255,0.75);
+      --success: #28a745;
+      --error: #dc3545;
+      --warning: #ffc107;
       
       /* ========== Spacing Scale (4px base) ========== */
       --space-1: 0.25rem;  /* 4px */
@@ -274,11 +268,11 @@
         rgba(110, 25, 37, 0.05) 100%
       );
       
-      /* ========== Typography System - Calda Elegante ========== */
+      /* ========== Typography System - Elegant Latin ========== */
       /* Font Families */
-      --font-title: 'Tenor Sans', sans-serif;
-      --font-body: 'Manrope', sans-serif;
-      --font-accent: 'Tenor Sans', sans-serif;
+      --font-title: 'Playfair Display', 'Cormorant Garamond', serif;
+      --font-body: 'Montserrat', sans-serif;
+      --font-accent: 'Cormorant Garamond', serif;
       
       --font-size-xs: 0.75rem;   /* 12px - labels, captions */
       --font-size-sm: 0.875rem;  /* 14px - body, descriptions */
@@ -380,7 +374,7 @@
     }
     
     
-    /* Elegant Background Overlay - Static & Clean */
+    /* Elegant Fire Background Overlay */
     body::before {
       content: '';
       position: fixed;
@@ -389,11 +383,18 @@
       right: 0;
       bottom: 0;
       background: 
-        radial-gradient(ellipse at top, rgba(198, 168, 124, 0.05) 0%, transparent 70%),
-        radial-gradient(ellipse at bottom, rgba(28, 27, 27, 1) 0%, transparent 70%);
+        radial-gradient(ellipse at top, rgba(208, 167, 63, 0.08) 0%, transparent 70%),
+        radial-gradient(ellipse at bottom, rgba(110, 25, 37, 0.1) 0%, transparent 70%);
       pointer-events: none;
       z-index: 1;
-      opacity: 0.4;
+      opacity: 0.6;
+      animation: fireFlicker 8s ease-in-out infinite alternate;
+    }
+    
+    @keyframes fireFlicker {
+      0% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.02); }
+      100% { opacity: 0.5; transform: scale(0.98); }
     }
 
     img {
@@ -536,15 +537,74 @@
       transform: scale(1.05);
     }
 
+    @keyframes fireIgnite {
+      0% { 
+        transform: scale(1);
+        filter: brightness(1) drop-shadow(0 0 3px rgba(208, 167, 63, 0.3));
+      }
+      20% { 
+        transform: scale(1.03);
+        filter: brightness(1.08) drop-shadow(0 0 6px rgba(208, 167, 63, 0.5)) drop-shadow(0 0 3px rgba(110, 25, 37, 0.3));
+      }
+      40% { 
+        transform: scale(1.05);
+        filter: brightness(1.12) drop-shadow(0 0 8px rgba(208, 167, 63, 0.6)) drop-shadow(0 0 4px rgba(110, 25, 37, 0.4));
+      }
+      60% { 
+        transform: scale(1.04);
+        filter: brightness(1.1) drop-shadow(0 0 7px rgba(208, 167, 63, 0.55)) drop-shadow(0 0 4px rgba(110, 25, 37, 0.35));
+      }
+      80% { 
+        transform: scale(1.02);
+        filter: brightness(1.05) drop-shadow(0 0 5px rgba(208, 167, 63, 0.45)) drop-shadow(0 0 3px rgba(110, 25, 37, 0.3));
+      }
+      100% { 
+        transform: scale(1);
+        filter: brightness(1) drop-shadow(0 0 2px rgba(208, 167, 63, 0.2));
+      }
+    }
+    
+    @keyframes fireBurning {
+      0%, 100% { 
+        filter: brightness(1.05) drop-shadow(0 0 8px rgba(208, 167, 63, 0.5)) drop-shadow(0 0 4px rgba(110, 25, 37, 0.3));
+        transform: scale(1);
+      }
+      25% { 
+        filter: brightness(1.15) drop-shadow(0 0 12px rgba(208, 167, 63, 0.7)) drop-shadow(0 0 6px rgba(110, 25, 37, 0.5));
+        transform: scale(1.02);
+      }
+      50% { 
+        filter: brightness(1.2) drop-shadow(0 0 15px rgba(208, 167, 63, 0.8)) drop-shadow(0 0 8px rgba(110, 25, 37, 0.6)) drop-shadow(0 0 4px rgba(255, 220, 120, 0.4));
+        transform: scale(1.04);
+      }
+      75% { 
+        filter: brightness(1.1) drop-shadow(0 0 10px rgba(208, 167, 63, 0.6)) drop-shadow(0 0 5px rgba(110, 25, 37, 0.4));
+        transform: scale(1.01);
+      }
+    }
+    
+    @keyframes flameFlicker {
+      0%, 100% { 
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      33% { 
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+      66% { 
+        opacity: 0.9;
+        transform: translate(-50%, -50%) scale(1.05);
+      }
+    }
+
     .logo-img.is-animating {
-      transform: scale(1.05);
-      filter: brightness(1.1);
+      animation: fireIgnite 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
     
     .logo-link:hover .logo-img:not(.is-animating),
     .logo-link.is-burning .logo-img {
-      transform: scale(1.05);
-      filter: drop-shadow(0 0 8px rgba(198, 168, 124, 0.3));
+      animation: fireBurning 2s ease-in-out infinite;
     }
     
 
@@ -1172,15 +1232,15 @@
     /* ==================== Filters ==================== */
     .service-card {
       background: var(--card);
-      border: 1px solid var(--border);
+      border: 1px solid rgba(208, 167, 63, 0.25);
       border-radius: 0;
-      padding: clamp(2rem, 3vw, 2.5rem);
-      box-shadow: none; /* Cleaner look */
+      padding: clamp(1.5rem, 3vw, 2.4rem);
+      box-shadow: var(--shadow-elegant-md);
       display: flex;
       flex-direction: column;
-      gap: 1.25rem;
+      gap: 1.1rem;
       position: relative;
-      transition: var(--transition-slow);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
       overflow: hidden;
     }
 
@@ -1188,7 +1248,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(198, 168, 124, 0.03), rgba(141, 35, 53, 0.03));
+      background: linear-gradient(135deg, rgba(208, 167, 63, 0.08), rgba(110, 25, 37, 0.12));
       opacity: 0;
       transition: opacity 0.35s ease;
       pointer-events: none;
@@ -2231,29 +2291,6 @@
       opacity: 0.6;
     }
 
-    /* Step Indicator */
-    .step-dot {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      color: var(--text-secondary);
-      transition: var(--transition);
-      position: relative;
-      z-index: 1;
-    }
-    .step-dot.active {
-      background: var(--gold);
-      color: #1a1a1a;
-      box-shadow: 0 0 15px rgba(198, 168, 124, 0.4);
-      border-color: var(--gold);
-    }
-
     @media (max-width: 768px) {
       .toast-container {
         top: 80px;
@@ -2546,80 +2583,6 @@
       </div>
   </section>
 
-  <!-- Divisore Sezione -->
-  <div class="section-divider">
-    <i class="fa-solid fa-leaf section-divider-icon"></i>
-  </div>
-
-  <!-- Shop Editoriale / Prodotti Consigliati -->
-  <section id="products" class="filters-section" style="margin-top: 4rem;">
-    <div class="section-header">
-      <h2 class="section-title elegant-title" data-it-text="La Routine a Casa" data-en-text="Home Routine">La Routine a Casa</h2>
-      <p style="text-align: center; color: var(--text-muted); margin: 1.5rem 0 3rem; font-size: 1.1rem; line-height: 1.8; max-width: 800px; margin-left: auto; margin-right: auto;" data-it-text="Per mantenere i risultati del trattamento, consiglio solo prodotti che ho testato personalmente." data-en-text="To maintain treatment results, I only recommend products I have personally tested.">Per mantenere i risultati del trattamento, consiglio solo prodotti che ho testato personalmente.</p>
-    </div>
-
-    <div class="services-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; max-width: 1200px; margin: 0 auto;">
-
-      <!-- Product 1 -->
-      <div class="service-card" style="padding: 0; background: var(--bg); border: none;">
-         <div style="position: relative; padding-top: 100%; overflow: hidden; background: #2a2a2a;">
-            <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 3rem;">
-               <i class="fa-solid fa-pump-soap"></i>
-            </div>
-         </div>
-         <div style="padding: 1.5rem 1rem;">
-            <h3 class="service-card-title" style="font-size: 1.25rem; margin-bottom: 0.5rem;">Siero Ciglia Rigenerante</h3>
-            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; font-style: italic;">
-               "Lo uso ogni sera dopo il Lash Lift. Nutre la cheratina e prolunga l'effetto curvatura di 2 settimane."
-            </p>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-               <span style="color: var(--gold); font-weight: 700;">€35.00</span>
-               <a href="#" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Acquista <i class="fa-solid fa-external-link-alt" style="margin-left: 5px;"></i></a>
-            </div>
-         </div>
-      </div>
-
-      <!-- Product 2 -->
-      <div class="service-card" style="padding: 0; background: var(--bg); border: none;">
-         <div style="position: relative; padding-top: 100%; overflow: hidden; background: #2a2a2a;">
-            <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 3rem;">
-               <i class="fa-solid fa-spray-can"></i>
-            </div>
-         </div>
-         <div style="padding: 1.5rem 1rem;">
-            <h3 class="service-card-title" style="font-size: 1.25rem; margin-bottom: 0.5rem;">Olio After-Care PMU</h3>
-            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; font-style: italic;">
-               "Fondamentale per la guarigione delle sopracciglia tatuate. Mantiene il colore vivido e la pelle idratata."
-            </p>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-               <span style="color: var(--gold); font-weight: 700;">€22.00</span>
-               <a href="#" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Acquista <i class="fa-solid fa-external-link-alt" style="margin-left: 5px;"></i></a>
-            </div>
-         </div>
-      </div>
-
-      <!-- Product 3 -->
-      <div class="service-card" style="padding: 0; background: var(--bg); border: none;">
-         <div style="position: relative; padding-top: 100%; overflow: hidden; background: #2a2a2a;">
-            <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 3rem;">
-               <i class="fa-solid fa-mask"></i>
-            </div>
-         </div>
-         <div style="padding: 1.5rem 1rem;">
-            <h3 class="service-card-title" style="font-size: 1.25rem; margin-bottom: 0.5rem;">Maschera Oro 24K</h3>
-            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; font-style: italic;">
-               "Il mio segreto per preparare la pelle prima di un evento. Illumina l'incarnato istantaneamente."
-            </p>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-               <span style="color: var(--gold); font-weight: 700;">€45.00</span>
-               <a href="#" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Acquista <i class="fa-solid fa-external-link-alt" style="margin-left: 5px;"></i></a>
-            </div>
-         </div>
-      </div>
-
-    </div>
-  </section>
-
   <!-- Sezione Prenotazioni -->
   <section id="booking" class="commission-section" style="margin-top: 4rem; width: 100%; max-width: 100%;">
     <div class="commission-header" style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
@@ -2630,97 +2593,93 @@
     <div class="booking-form-container" style="max-width: 1400px; width: 100%; margin: 2rem auto; background: linear-gradient(135deg, rgba(208, 167, 63, 0.03), var(--card)); padding: clamp(2rem, 5vw, 4rem); border-radius: 0; border: 1px solid rgba(208, 167, 63, 0.3); box-shadow: var(--shadow-elegant-lg); position: relative; overflow: hidden;">
       <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(180deg, var(--gold), var(--red-dark)); opacity: 0.6;"></div>
       <form id="bookingForm" onsubmit="submitBooking(event)">
-        <!-- Step Indicator -->
-        <div class="step-indicator" style="display: flex; justify-content: center; margin-bottom: 2.5rem; gap: 1rem;">
-            <div class="step-dot active" data-step="1">1</div>
-            <div class="step-dot" data-step="2">2</div>
-            <div class="step-dot" data-step="3">3</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" data-it-text="Nome e Cognome" data-en-text="Full Name">Nome e Cognome</label>
+            <input type="text" class="form-input" required data-it-placeholder="Come ti chiami?" data-en-placeholder="What's your name?" placeholder="Come ti chiami?">
         </div>
-
-        <!-- Step 1: Service & Date -->
-        <div id="step-1" class="booking-step">
-            <h3 class="elegant-title" style="text-align: center; margin-bottom: 1.5rem;">Configura il Trattamento</h3>
-
-            <div class="form-group">
-                <label class="form-label">Servizio</label>
-                <select class="form-select" id="bookingService" required onchange="updateBookingPrice(); loadAvailableDates();">
-                  <option value="">Seleziona...</option>
-                  <optgroup label="Lifting e Trattamenti">
-                    <option value="lash-lifting" data-price="60">Lash Lifting Classico - €60</option>
-                    <option value="lash-lifting-plus" data-price="75">Lash Lifting + Tinting - €75</option>
-                    <option value="brows-lifting" data-price="85">Brows Lifting + Laminazione - €85</option>
-                  </optgroup>
-                  <optgroup label="Trucco Permanente">
-                    <option value="pmu-brows" data-price="400">Microblading & PMU - €400</option>
-                    <option value="pmu-lips" data-price="450">Velvet Lips - €450</option>
-                  </optgroup>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Data e Ora</label>
-                <div id="availableDates" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
-                    <!-- Dates injected via JS -->
-                </div>
-                <input type="hidden" id="bookingDate">
-            </div>
-
-            <div style="background: var(--card-hover); padding: 1rem; border-left: 2px solid var(--gold); margin: 1.5rem 0;">
-                <span style="color: var(--text-secondary); font-size: 0.9rem;">Totale Stimato:</span>
-                <span id="bookingPrice" style="color: var(--gold); font-weight: 700; font-size: 1.2rem; display: block;">€0.00</span>
-            </div>
-
-            <button type="button" class="btn btn-primary" onclick="nextStep(2)" style="width: 100%; justify-content: center;">
-                Continua <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i>
-            </button>
+          <div class="form-group">
+            <label class="form-label" data-it-text="Telefono" data-en-text="Phone">Telefono</label>
+            <input type="tel" class="form-input" required data-it-placeholder="+39 123 456 7890" data-en-placeholder="+1 234 567 8900" placeholder="+39 123 456 7890">
         </div>
-
-        <!-- Step 2: Personal Details -->
-        <div id="step-2" class="booking-step hidden">
-            <h3 class="elegant-title" style="text-align: center; margin-bottom: 1.5rem;">I Tuoi Dati</h3>
-
-            <div class="form-grid">
-                <div class="form-group">
-                    <label class="form-label">Nome Completo</label>
-                    <input type="text" class="form-input" id="userName" required placeholder="Il tuo nome">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Telefono</label>
-                    <input type="tel" class="form-input" id="userPhone" required placeholder="+39 ...">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Note (Allergie, richieste...)</label>
-                <textarea class="form-textarea" id="userNotes" rows="3"></textarea>
-            </div>
-
-            <div style="display: flex; gap: 1rem;">
-                <button type="button" class="btn btn-outline" onclick="nextStep(1)" style="flex: 1;">Indietro</button>
-                <button type="button" class="btn btn-primary" onclick="nextStep(3)" style="flex: 1; justify-content: center;">
-                    Riepilogo
-                </button>
-            </div>
+          <div class="form-group">
+            <label class="form-label" data-it-text="Email (opzionale)" data-en-text="Email (optional)">Email (opzionale)</label>
+            <input type="email" class="form-input" data-it-placeholder="tua@email.com" data-en-placeholder="your@email.com" placeholder="tua@email.com">
         </div>
-
-        <!-- Step 3: Confirmation -->
-        <div id="step-3" class="booking-step hidden">
-            <h3 class="elegant-title" style="text-align: center; margin-bottom: 1.5rem;">Conferma</h3>
-
-            <div style="background: rgba(255,255,255,0.03); padding: 1.5rem; margin-bottom: 1.5rem;">
-                <p style="margin-bottom: 0.5rem;"><strong style="color: var(--gold);">Servizio:</strong> <span id="summaryService">-</span></p>
-                <p style="margin-bottom: 0.5rem;"><strong style="color: var(--gold);">Data:</strong> <span id="summaryDate">-</span></p>
-                <p style="margin-bottom: 0.5rem;"><strong style="color: var(--gold);">Cliente:</strong> <span id="summaryName">-</span></p>
-                <p style="margin-bottom: 0;"><strong style="color: var(--gold);">Totale:</strong> <span id="summaryPrice">-</span></p>
-            </div>
-
-            <div style="display: flex; gap: 1rem;">
-                <button type="button" class="btn btn-outline" onclick="nextStep(2)" style="flex: 1;">Modifica</button>
-                <button type="submit" class="btn btn-primary" style="flex: 2; justify-content: center;">
-                    Conferma Prenotazione
-                </button>
-            </div>
+      </div>
+        <div class="form-grid">
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label class="form-label" data-it-text="Servizio Desiderato" data-en-text="Desired Service">Servizio Desiderato</label>
+            <select class="form-select" id="bookingService" required onchange="updateBookingPrice(); loadAvailableDates();">
+              <option value="" data-it-text="Scegli un servizio..." data-en-text="Choose a service...">Scegli un servizio...</option>
+              <optgroup label="🔥 Lifting e Trattamenti" data-it-label="🔥 Lifting e Trattamenti" data-en-label="🔥 Lifting and Treatments">
+                <option value="lash-lifting" data-price="60">Lash Lifting Classico - €60</option>
+                <option value="lash-lifting-plus" data-price="75">Lash Lifting + Tinting - €75</option>
+                <option value="brows-lifting" data-price="50">Brows Lifting - €50</option>
+                <option value="laminazione-brows" data-price="55">Laminazione Sopracciglia - €55</option>
+                <option value="brows-lifting-laminazione" data-price="85">Brows Lifting + Laminazione - €85</option>
+              </optgroup>
+              <optgroup label="🎨 Colorazione e Design" data-it-label="🎨 Colorazione e Design" data-en-label="🎨 Coloring and Design">
+                <option value="tinting-ciglia" data-price="35">Tinting Ciglia - €35</option>
+                <option value="shaping-brows" data-price="25">Shaping Sopracciglia - €25</option>
+                <option value="design-brows" data-price="40">Design Sopracciglia - €40</option>
+                <option value="henna-brows" data-price="45">Henna Sopracciglia - €45</option>
+                <option value="henna-design-combo" data-price="75">Design + Henna Sopracciglia - €75</option>
+              </optgroup>
+              <optgroup label="✨ Trucco Permanente (PMU)" data-it-label="✨ Trucco Permanente (PMU)" data-en-label="✨ Permanent Makeup (PMU)">
+                <option value="pmu-brows" data-price="400">Trucco Permanente Sopracciglia - €400</option>
+                <option value="pmu-brows-microblading" data-price="420">PMU Sopracciglia - Microblading - €420</option>
+                <option value="pmu-lips" data-price="450">Trucco Permanente Labbra - €450</option>
+                <option value="pmu-lips-lip-blush" data-price="420">Lip Blush Permanente - €420</option>
+                <option value="pmu-eyeliner" data-price="350">Eyeliner Permanente - €350</option>
+                <option value="pmu-eyeliner-linea-sottile" data-price="320">Eyeliner - Linea Sottile - €320</option>
+                <option value="pmu-eyeliner-smoke" data-price="380">Eyeliner - Smoke Effect - €380</option>
+                <option value="ritocco-pmu" data-price="150">Ritocco Trucco Permanente - €150</option>
+              </optgroup>
+              <optgroup label="🎁 Pacchetti Convenienza" data-it-label="🎁 Pacchetti Convenienza" data-en-label="🎁 Convenience Packages">
+                <option value="combo-lifting-completo" data-price="165">Pacchetto Lifting Completo - €165</option>
+                <option value="combo-eyebrows-completo" data-price="140">Pacchetto Sopracciglia Completo - €140</option>
+                <option value="combo-pmu-completo" data-price="1100">Pacchetto PMU Completo Viso - €1100</option>
+              </optgroup>
+              <optgroup label="💬 Consulenza (solo per PMU)" data-it-label="💬 Consulenza (solo per PMU)" data-en-label="💬 Consultation (PMU only)">
+                <option value="analisi-personalizzata" data-price="50">Analisi Personalizzata Viso - €50</option>
+              </optgroup>
+            </select>
+    </div>
+  </div>
+        <div class="form-grid">
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label class="form-label" data-it-text="Data Disponibile" data-en-text="Available Date">Data Disponibile</label>
+            <div id="availableDates" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; margin-top: 1rem;">
+              <!-- Le date disponibili verranno caricate qui dinamicamente -->
+      </div>
+            <input type="hidden" id="bookingDate" required>
+            <small style="color: var(--text-muted); display: block; margin-top: 0.5rem;" data-it-text="* Le date vengono aggiornate periodicamente. Se non vedi date disponibili, contattami su WhatsApp!" data-en-text="* Dates are updated periodically. If you don't see available dates, contact me on WhatsApp!">* Le date vengono aggiornate periodicamente. Se non vedi date disponibili, contattami su WhatsApp!</small>
+          </div>
         </div>
+        <div class="form-grid">
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label class="form-label" data-it-text="Orario Disponibile" data-en-text="Available Time">Orario Disponibile</label>
+            <div id="availableTimes" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 0.75rem; margin-top: 1rem;">
+              <!-- Gli orari disponibili verranno caricati qui dinamicamente -->
+          </div>
+            <input type="hidden" id="bookingTime" required>
+            <small style="color: var(--text-muted); display: block; margin-top: 0.5rem;" data-it-text="* Seleziona prima una data per vedere gli orari disponibili" data-en-text="* Select a date first to see available times">* Seleziona prima una data per vedere gli orari disponibili</small>
+          </div>
+          </div>
+        <div class="form-group">
+          <label class="form-label" data-it-text="Note o Richieste Speciali" data-en-text="Notes or Special Requests">Note o Richieste Speciali</label>
+          <textarea class="form-textarea" data-it-placeholder="Scrivi qui eventuali richieste particolari o informazioni utili..." data-en-placeholder="Write any special requests or useful information here..." placeholder="Scrivi qui eventuali richieste particolari o informazioni utili..." rows="3"></textarea>
+        </div>
+        <div style="background: var(--card-hover); padding: 1rem; border-radius: var(--radius-md); margin-bottom: 1.5rem; border-left: 3px solid var(--gold);">
+          <strong style="color: var(--gold);" data-it-text="Prezzo Selezionato:" data-en-text="Selected Price:">Prezzo Selezionato:</strong>
+          <span id="bookingPrice" style="font-size: 1.2rem; color: var(--text); margin-left: 0.5rem;">€0.00</span>
+          <small style="display: block; color: var(--text-secondary); margin-top: 0.5rem;" data-it-text="* Il prezzo finale può variare in base alle esigenze personalizzate" data-en-text="* Final price may vary based on customized needs">* Il prezzo finale può variare in base alle esigenze personalizzate</small>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; text-align: center; display: flex; justify-content: center; align-items: center; font-size: 1.1rem;">
+          <span data-it-text="Invia Prenotazione" data-en-text="Send Booking Request">Invia Prenotazione</span>
+          <span style="margin-left: 0.5rem;">🔥</span>
+        </button>
       </form>
       </div>
   </section>
@@ -3082,192 +3041,3 @@
 
     updateLanguage();
     // ==================== Services - LISTA COMPLETA SERVIZI ====================
-
-    function updateAboutText() {
-       console.log('Update About Text called');
-    }
-
-    const services = [
-      {
-        id: 'lash-lifting',
-        title: 'Lash Lifting Classico',
-        desc: {
-          it: 'Il trattamento signature per ciglia naturali. Curvatura, tintura e cheratina per uno sguardo magnetico.',
-          en: 'The signature treatment for natural lashes. Curl, tint, and keratin for a magnetic look.'
-        },
-        detail: {
-          it: 'Perfetto se: hai ciglia dritte o spioventi. Risultato: 6-8 settimane di mascara effect.',
-          en: 'Perfect if: you have straight lashes. Result: 6-8 weeks of mascara effect.'
-        },
-        price: '€60',
-        duration: '60 min',
-        icon: 'fa-eye'
-      },
-      {
-        id: 'brows-lifting',
-        title: 'Brows Lifting + Laminazione',
-        desc: {
-          it: 'Sopracciglia piene e disciplinate. La laminazione nutre e fissa la forma desiderata.',
-          en: 'Full and disciplined brows. Lamination nourishes and fixes the desired shape.'
-        },
-        detail: {
-          it: 'Perfetto se: hai sopracciglia ribelli o sottili. Include: Shaping e tinta.',
-          en: 'Perfect if: you have unruly or thin brows. Includes: Shaping and tint.'
-        },
-        price: '€85',
-        duration: '60 min',
-        icon: 'fa-star'
-      },
-      {
-        id: 'pmu-brows',
-        title: 'Microblading & PMU',
-        desc: {
-          it: 'Ricostruzione iper-realistica delle sopracciglia. Tecnica pelo a pelo o sfumatura.',
-          en: 'Hyper-realistic eyebrow reconstruction. Hair-stroke or shading technique.'
-        },
-        detail: {
-          it: 'Perfetto se: cerchi definizione duratura (12-18 mesi). Include consulenza visagistica.',
-          en: 'Perfect if: you want lasting definition (12-18 months). Includes visage consultation.'
-        },
-        price: '€400',
-        duration: '120 min',
-        icon: 'fa-paint-brush'
-      },
-      {
-        id: 'pmu-lips',
-        title: 'Velvet Lips PMU',
-        desc: {
-          it: 'Rivitalizza il colore delle labbra con un effetto acquerello naturale.',
-          en: 'Revitalize lip color with a natural watercolor effect.'
-        },
-        detail: {
-          it: 'Perfetto se: hai labbra pallide o contorno irregolare. Guarigione rapida.',
-          en: 'Perfect if: you have pale lips or irregular contour. Fast healing.'
-        },
-        price: '€450',
-        duration: '150 min',
-        icon: 'fa-heart'
-      }
-    ];
-
-    function renderServices() {
-      const grid = document.getElementById('servicesGrid');
-      if(!grid) return;
-      grid.innerHTML = '';
-
-      const loading = document.getElementById('servicesLoading');
-      if(loading) loading.style.display = 'none';
-
-      services.forEach(service => {
-        const card = document.createElement('div');
-        card.className = 'service-card';
-        // Add specific class for animation delay if needed
-        const detailText = currentLang === 'it' ? service.detail.it : service.detail.en;
-        const descText = currentLang === 'it' ? service.desc.it : service.desc.en;
-
-        card.innerHTML = `
-          <div class="service-card-header">
-            <div class="service-card-icon"><i class="fa-solid ${service.icon}"></i></div>
-            <h3 class="service-card-title">${service.title}</h3>
-          </div>
-          <p class="service-card-desc">${descText}</p>
-
-          <div style="margin-top: auto; margin-bottom: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-light);">
-             <small style="color: var(--gold); font-family: var(--font-body); font-weight: 600; letter-spacing: 0.03em;">
-               <i class="fa-solid fa-check" style="margin-right: 4px;"></i> ${detailText}
-             </small>
-          </div>
-
-          <div class="service-footer" style="border-top: none; padding-top: 0;">
-            <div class="service-price">${service.price} <small>${service.duration}</small></div>
-            <button class="btn btn-outline" onclick="selectService('${service.id}')">
-              ${currentLang === 'it' ? 'Prenota' : 'Book'}
-            </button>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
-    }
-
-    function selectService(serviceId) {
-       const select = document.getElementById('bookingService');
-       if(select) {
-         select.value = serviceId;
-         document.querySelector('#booking').scrollIntoView({ behavior: 'smooth' });
-         updateBookingPrice();
-         // Auto advance logic or highlight
-       }
-    }
-
-    function nextStep(step) {
-      // Validate current step
-      if(step === 2) {
-         if(!document.getElementById('bookingService').value) {
-            showToast({ type: 'warning', message: 'Seleziona un servizio per continuare.' });
-            return;
-         }
-      }
-      if(step === 3) {
-         const name = document.getElementById('userName').value;
-         const phone = document.getElementById('userPhone').value;
-         if(!name || !phone) {
-            showToast({ type: 'warning', message: 'Inserisci Nome e Telefono.' });
-            return;
-         }
-         updateSummary();
-      }
-
-      document.querySelectorAll('.booking-step').forEach(el => el.classList.add('hidden'));
-      document.getElementById('step-' + step).classList.remove('hidden');
-
-      document.querySelectorAll('.step-dot').forEach(el => {
-         const s = parseInt(el.getAttribute('data-step'));
-         if(s <= step) el.classList.add('active');
-         else el.classList.remove('active');
-      });
-    }
-
-    function updateSummary() {
-      const serviceSelect = document.getElementById('bookingService');
-      const serviceName = serviceSelect.options[serviceSelect.selectedIndex].text;
-      const price = document.getElementById('bookingPrice').textContent;
-
-      document.getElementById('summaryService').textContent = serviceName.split('-')[0];
-      document.getElementById('summaryDate').textContent = "Data da concordare";
-      document.getElementById('summaryName').textContent = document.getElementById('userName').value;
-      document.getElementById('summaryPrice').textContent = price;
-    }
-
-    function submitBooking(event) {
-      event.preventDefault();
-      showToast({ type: 'success', title: 'Richiesta Inviata', message: 'Ti confermerò l\'appuntamento su WhatsApp entro 24h.' });
-      setTimeout(() => window.location.reload(), 3000);
-    }
-
-    function updateBookingPrice() {
-       const select = document.getElementById('bookingService');
-       const priceDisplay = document.getElementById('bookingPrice');
-       if(select && priceDisplay) {
-         const option = select.options[select.selectedIndex];
-         const price = option.getAttribute('data-price');
-         if(price) priceDisplay.textContent = '€' + price;
-       }
-       loadAvailableDates();
-    }
-
-    function loadAvailableDates() {
-       const container = document.getElementById('availableDates');
-       if(container) {
-         container.innerHTML = `
-           <div class="booking-date-option" onclick="this.classList.toggle('active')">Lun 12/06</div>
-           <div class="booking-date-option" onclick="this.classList.toggle('active')">Mar 13/06</div>
-           <div class="booking-date-option" onclick="this.classList.toggle('active')">Mer 14/06</div>
-         `;
-       }
-    }
-
-    // Initial render
-    renderServices();
-  </script>
-</body>
-</html>
