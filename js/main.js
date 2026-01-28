@@ -142,8 +142,8 @@ function renderProducts() {
         card.innerHTML = `
          <div class="card-header">
             <div class="card-icon"><i class="fa-solid ${product.icon}"></i></div>
+            <h3 class="card-title">${product.title}</h3>
          </div>
-         <h3 class="card-title">${product.title}</h3>
 
          <p class="card-desc" style="font-style: italic;">
             ${descText}
