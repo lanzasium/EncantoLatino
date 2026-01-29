@@ -194,8 +194,9 @@
     /* ==================== Design System Variables ==================== */
     :root {
       /* Header/Logo sizing */
-      --logo-size: 120px;           /* desktop default */
-      --header-padding-y: 0rem;     /* nessun padding verticale nel header */
+      --logo-size: 90px;           /* desktop default */
+      --header-padding-y: 0.6rem;     /* respiro verticale nel header */
+      --header-control-size: 38px;
       --header-height: calc(var(--logo-size) + (var(--header-padding-y) * 2));
       /* ========== Color Palette - Encanto Latino ========== */
       --gold: #d0a73f;
@@ -437,32 +438,87 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: var(--space-4);
       position: relative;
       z-index: 1;
       min-height: var(--header-height);
+      flex-wrap: wrap;
     }
     
     @media (max-width: 768px) {
-      :root { --logo-size: 110px; }
+      :root { --logo-size: 80px; }
       .header-top { min-height: var(--header-height); }
     }
 
-    .header-left {
+    .header-left,
+    .header-right {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.8rem;
       z-index: 1;
     }
 
-    .brand-center {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
+    .header-left {
+      justify-content: flex-start;
+    }
+
+    .header-right {
+      justify-content: flex-end;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .header-nav {
       display: flex;
       align-items: center;
       justify-content: center;
-      height: var(--logo-size);
+      gap: 2rem;
+      flex: 1;
+      min-width: 320px;
+    }
+
+    .header-social {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .header-social .social-link {
+      width: var(--header-control-size);
+      height: var(--header-control-size);
+      font-size: 0.9rem;
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .brand-name {
+      font-family: var(--font-title);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .brand-subtitle {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
     }
 
     .logo-link {
@@ -608,11 +664,13 @@
     }
     
 
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      z-index: 1;
+    .header-cta {
+      min-height: var(--header-control-size);
+      padding: 0 1.4rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      box-shadow: var(--shadow-elegant-md), var(--fire-glow-sm);
     }
 
     .icon-btn {
@@ -661,8 +719,8 @@
     }
 
     .lang-toggle {
-      width: var(--icon-btn-size-md);
-      height: var(--icon-btn-size-md);
+      width: var(--header-control-size);
+      height: var(--header-control-size);
       background: 
         radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
       border: 2px solid var(--gold);
@@ -1980,6 +2038,10 @@
       .nav-links {
         gap: 1.35rem;
       }
+
+      .header-nav {
+        gap: 1.25rem;
+      }
       
       .filters-row {
         flex-direction: column;
@@ -1994,12 +2056,21 @@
       :root {
         --title-hero: 1.9rem;
         --title-section: 1.5rem;
-        --logo-size: 110px;
+        --logo-size: 78px;
+        --header-control-size: 34px;
       }
 
       .header-top {
         padding: var(--header-padding-y) var(--space-4);
         min-height: var(--header-height);
+      }
+
+      .header-nav {
+        order: 3;
+        flex-basis: 100%;
+        justify-content: center;
+        padding-top: 0.35rem;
+        border-top: 1px solid rgba(208, 167, 63, 0.2);
       }
 
       .icon-btn {
@@ -2012,6 +2083,18 @@
         width: 34px;
         height: 34px;
         font-size: 0.7rem;
+      }
+
+      .header-cta {
+        min-height: var(--header-control-size);
+        padding: 0 1.1rem;
+        font-size: 0.68rem;
+      }
+
+      .header-social .social-link {
+        width: var(--header-control-size);
+        height: var(--header-control-size);
+        font-size: 0.8rem;
       }
       
       .social-link {
@@ -2079,13 +2162,19 @@
       :root {
         --title-hero: 1.6rem;
         --title-section: 1.4rem;
-        --logo-size: 95px;
+        --logo-size: 68px;
+        --header-control-size: 30px;
       }
 
       .header-top {
         padding: var(--header-padding-y) var(--space-3);
         gap: 0.3rem;
         min-height: var(--header-height);
+      }
+
+      .header-nav {
+        gap: 0.6rem;
+        padding-top: 0.25rem;
       }
 
       .icon-btn {
@@ -2099,6 +2188,14 @@
         height: 30px;
         font-size: 0.6rem;
         padding: 0;
+      }
+
+      .header-cta {
+        display: none;
+      }
+
+      .header-social {
+        display: none;
       }
 
       .badge {
@@ -2326,87 +2423,31 @@
   <header class="header">
     <div class="header-top">
       <div class="header-left">
-        <button class="lang-toggle" id="langToggle">IT</button>
-      </div>
-      
-      <div class="brand-center">
-        <a href="#" class="logo-link" onclick="scrollToTop(event)">
-          <div class="logo-fire" aria-hidden="true">
-            <img src="images/logo.png" alt="Logo Encanto Latino" class="logo-img">
-            <svg class="flames" viewBox="0 0 200 120" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="flameGradient" x1="0" x2="0" y1="0" y2="1">
-                  <stop offset="0%" stop-color="#ffef6b"/>
-                  <stop offset="30%" stop-color="#d0a73f"/>
-                  <stop offset="70%" stop-color="#ff3b0f"/>
-                  <stop offset="100%" stop-color="#6e1925"/>
-                </linearGradient>
-                <filter id="blurSmall">
-                  <feGaussianBlur stdDeviation="1.5" />
-                </filter>
-                <filter id="glow">
-                  <feGaussianBlur stdDeviation="6" result="b" />
-                  <feMerge>
-                    <feMergeNode in="b"/>
-                    <feMergeNode in="SourceGraphic"/>
-                  </feMerge>
-                </filter>
-              </defs>
-
-              <!-- Scintille sinistra -->
-              <g class="embers" opacity="0.9">
-                <circle cx="45" cy="100" r="1.4" fill="#ffef6b">
-                  <animate attributeName="cy" values="100;80;60" dur="1.6s" repeatCount="indefinite" />
-                  <animate attributeName="opacity" values="0.9;0.5;0" dur="1.6s" repeatCount="indefinite" />
-                </circle>
-                <circle cx="75" cy="110" r="1.2" fill="#ff9f2a">
-                  <animate attributeName="cy" values="110;90;70" dur="1.9s" repeatCount="indefinite" begin="0.3s" />
-                  <animate attributeName="opacity" values="0.9;0.4;0" dur="1.9s" repeatCount="indefinite" begin="0.3s"/>
-                </circle>
-              </g>
-
-              <!-- Scintille destra -->
-              <g class="embers" opacity="0.9">
-                <circle cx="125" cy="100" r="1.4" fill="#ffef6b">
-                  <animate attributeName="cy" values="100;80;60" dur="1.7s" repeatCount="indefinite" begin="0.2s" />
-                  <animate attributeName="opacity" values="0.9;0.5;0" dur="1.7s" repeatCount="indefinite" begin="0.2s" />
-                </circle>
-                <circle cx="155" cy="110" r="1.2" fill="#ff9f2a">
-                  <animate attributeName="cy" values="110;90;70" dur="2s" repeatCount="indefinite" begin="0.5s" />
-                  <animate attributeName="opacity" values="0.9;0.4;0" dur="2s" repeatCount="indefinite" begin="0.5s"/>
-                </circle>
-              </g>
-            </svg>
+        <div class="brand-lockup">
+          <a href="#" class="logo-link" onclick="scrollToTop(event)"><div class="logo-fire" aria-hidden="true"><img src="images/logo.png" alt="Logo Encanto Latino" class="logo-img"><svg class="flames" viewBox="0 0 200 120" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="flameGradient" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#ffef6b"/><stop offset="30%" stop-color="#d0a73f"/><stop offset="70%" stop-color="#ff3b0f"/><stop offset="100%" stop-color="#6e1925"/></linearGradient><filter id="blurSmall"><feGaussianBlur stdDeviation="1.5" /></filter><filter id="glow"><feGaussianBlur stdDeviation="6" result="b" /><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g class="embers" opacity="0.9"><circle cx="45" cy="100" r="1.4" fill="#ffef6b"><animate attributeName="cy" values="100;80;60" dur="1.6s" repeatCount="indefinite" /><animate attributeName="opacity" values="0.9;0.5;0" dur="1.6s" repeatCount="indefinite" /></circle><circle cx="75" cy="110" r="1.2" fill="#ff9f2a"><animate attributeName="cy" values="110;90;70" dur="1.9s" repeatCount="indefinite" begin="0.3s" /><animate attributeName="opacity" values="0.9;0.4;0" dur="1.9s" repeatCount="indefinite" begin="0.3s"/></circle></g><g class="embers" opacity="0.9"><circle cx="125" cy="100" r="1.4" fill="#ffef6b"><animate attributeName="cy" values="100;80;60" dur="1.7s" repeatCount="indefinite" begin="0.2s" /><animate attributeName="opacity" values="0.9;0.5;0" dur="1.7s" repeatCount="indefinite" begin="0.2s" /></circle><circle cx="155" cy="110" r="1.2" fill="#ff9f2a"><animate attributeName="cy" values="110;90;70" dur="2s" repeatCount="indefinite" begin="0.5s" /><animate attributeName="opacity" values="0.9;0.4;0" dur="2s" repeatCount="indefinite" begin="0.5s"/></circle></g></svg></div></a>
+          <div class="brand-text">
+            <span class="brand-name" data-it-text="Encanto Latino" data-en-text="Encanto Latino">Encanto Latino</span>
+            <span class="brand-subtitle" data-it-text="Beauty Studio · Milano" data-en-text="Beauty Studio · Milan">Beauty Studio · Milano</span>
           </div>
-        </a>
+        </div>
       </div>
-      
-      </div>
-    </div>
-
-    <!-- Social Links -->
-    <div class="social-links-container" style="display: flex; justify-content: center; align-items: center; padding: 0.5rem 0; margin-top: 0;">
-      <div class="social-links" style="display: flex; gap: 1.5rem; align-items: center;">
-        <a href="https://www.instagram.com/encantolatinomilano?igsh=MTliN2cxd2d2eXQ0cA==" target="_blank" rel="noopener noreferrer" class="social-link instagram" aria-label="Instagram">
-          <i class="fa-brands fa-instagram"></i>
-        </a>
-        <a href="https://www.tiktok.com/@encanto..latino?_t=ZN-90x5lc4xqYY&_r=1" target="_blank" rel="noopener noreferrer" class="social-link tiktok" aria-label="TikTok">
-          <i class="fa-brands fa-tiktok"></i>
-        </a>
-        <a href="https://wa.me/393927234540?text=Ciao!%20Vorrei%20prenotare%20un%20appuntamento%20presso%20Encanto%20Latino." target="_blank" rel="noopener noreferrer" class="social-link whatsapp" aria-label="WhatsApp">
-          <i class="fa-brands fa-whatsapp"></i>
-        </a>
-      </div>
-    </div>
-
-    <!-- Navigation -->
-    <div class="nav-container">
-      <nav class="nav-links">
+      <nav class="header-nav nav-links">
         <a href="#about" class="nav-link" data-it-text="Chi Sono" data-en-text="About">Chi Sono</a>
         <a href="#services" class="nav-link" data-it-text="Servizi" data-en-text="Services">Servizi</a>
         <a href="#booking" class="nav-link" data-it-text="Prenotazioni" data-en-text="Booking">Prenotazioni</a>
         <a href="#location" class="nav-link" data-it-text="Dove Sono" data-en-text="Location">Dove Sono</a>
       </nav>
+      <div class="header-right">
+        <div class="header-actions">
+          <div class="header-social">
+            <a href="https://www.instagram.com/encantolatinomilano?igsh=MTliN2cxd2d2eXQ0cA==" target="_blank" rel="noopener noreferrer" class="social-link instagram" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@encanto..latino?_t=ZN-90x5lc4xqYY&_r=1" target="_blank" rel="noopener noreferrer" class="social-link tiktok" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/393927234540?text=Ciao!%20Vorrei%20prenotare%20un%20appuntamento%20presso%20Encanto%20Latino." target="_blank" rel="noopener noreferrer" class="social-link whatsapp" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+          <button class="lang-toggle" id="langToggle">IT</button>
+          <a href="#booking" class="btn btn-primary header-cta"><span data-it-text="Prenota Ora" data-en-text="Book Now">Prenota Ora</span><i class="fa-solid fa-calendar-check"></i></a>
+        </div>
+      </div>
     </div>
   </header>
 
